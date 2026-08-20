@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lilac Test Space</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #f8f5ff;
+      color: #33284a;
+      overflow-x: hidden;
+    }
+
+    /* Background decoration */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.45;
+      z-index: -1;
+    }
+
+    body::before {
+      width: 350px;
+      height: 350px;
+      background: #c9a7ff;
+      top: -100px;
+      left: -100px;
+    }
+
+    body::after {
+      width: 400px;
+      height: 400px;
+      background: #e5c7ff;
+      bottom: -150px;
+      right: -100px;
+    }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      padding: 22px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(120, 80, 170, 0.1);
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #7652a8;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #b27be3;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #665878;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #8c5bc5;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #eee4ff;
+      color: #7b52a8;
+      padding: 9px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    .tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #9b6bd6;
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 1.05;
+      color: #3e2b55;
+      margin-bottom: 24px;
+    }
+
+    h1 span {
+      color: #a56cd4;
+      font-style: italic;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #756780;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 14px 25px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .primary-btn {
+      background: #8256b5;
+      color: white;
+      border: 1px solid #8256b5;
+      box-shadow: 0 8px 25px rgba(130, 86, 181, 0.25);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-3px);
+      background: #70459f;
+    }
+
+    .secondary-btn {
+      background: rgba(255,255,255,0.7);
+      color: #725285;
+      border: 1px solid #dfccef;
+    }
+
+    .secondary-btn:hover {
+      background: white;
+      transform: translateY(-3px);
+    }
+
+    /* Cards */
+    .features {
+      padding: 40px 8% 100px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-heading h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: #463154;
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: #7d7087;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(180, 140, 220, 0.25);
+      border-radius: 22px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 18px 40px rgba(117, 77, 160, 0.12);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      background: #f0e5ff;
+      border-radius: 14px;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+      color: #49345a;
+    }
+
+    .card p {
+      color: #7b6c86;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Test section */
+    .test-section {
+      margin: 0 8% 80px;
+      padding: 50px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #8055ae, #b782dd);
+      color: white;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(122, 75, 165, 0.25);
+    }
+
+    .test-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .test-section p {
+      opacity: 0.9;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #887b91;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(130, 90, 170, 0.1);
+    }
+
+    /* ================================
+       FLOATING CHATBOT
+    ================================= */
+
+    .chatbot-container {
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      z-index: 9999;
+    }
+
+    .chatbot-launcher {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: none;
+      background: #0B1F3A;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(11, 31, 58, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    .chatbot-launcher:hover {
+      transform: scale(1.08);
+    }
+
+    .bot-icon {
+      font-size: 28px;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .chat-widget {
+      position: absolute;
+      right: 0;
+      bottom: 80px;
+      width: 413px;
+      height: 400px;
+      background: #ffffff;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px) scale(0.97);
+      transform-origin: bottom right;
+      transition: all 0.25s ease;
+    }
+
+    .chat-widget.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Chat Header */
+
+    .chat-header {
+      height: 75px;
+      background: #0B1F3A;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .chat-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-logo {
+      color: #ffffff;
+      font-size: 27px;
+      line-height: 1;
+    }
+
+    .chat-title h3 {
+      font-size: 17px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .close-chat {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 27px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    /* Chat Content */
+
+    .chat-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #ffffff;
+    }
+
+    .bot-message {
+      background: #EFEFEF;
+      color: #565759;
+      border-radius: 14px;
+      padding: 17px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      max-width: 85%;
+    }
+
+    /* Suggestions */
+
+    .chat-suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .suggestion {
+      width: 100%;
+      padding: 12px 14px;
+      text-align: left;
+      background: #ffffff;
+      border: 1px solid #565759;
+      border-radius: 12px;
+      color: #565759;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .suggestion:hover {
+      background: #EFEFEF;
+    }
+
+    /* Input Area */
+
+    .chat-input-area {
+      height: 90px;
+      border-top: 1px solid #EFEFEF;
+      background: #ffffff;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .chat-input {
+      flex: 1;
+      min-width: 0;
+      background: #EFEFEF;
+      border: 1px solid #565759;
+      border-radius: 12px;
+      padding: 14px 15px;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+      color: #565759;
+    }
+
+    .chat-input::placeholder {
+      color: #565759;
+    }
+
+    .chat-input:focus {
+      border-color: #565759;
+    }
+
+    /* Send Button */
+
+    .send-button {
+      width: 47px;
+      height: 47px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: none;
+      background: #0B1F3A;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .send-button:hover {
+      transform: scale(1.05);
+      background: #0B1F3A;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 800px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .chatbot-container {
+        right: 15px;
+        bottom: 15px;
+      }
+
+      .chat-widget {
+        width: min(413px, calc(100vw - 30px));
+        height: min(608px, calc(100vh - 110px));
+        bottom: 75px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .test-section {
+        margin: 0 5% 60px;
+        padding: 40px 25px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">lilac<span>.</span></div>
+
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#test">Test Area</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="tag">
+        DevRev Plug Chat SDK Testing
+      </div>
+
+      <h1>
+        A little space to
+        <span>test big things.</span>
+      </h1>
+
+      <p>
+        A simple lilac playground created specifically to test
+        DevRev Plug Chat functionality, appearance, behaviour,
+        and user interactions.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#test" class="primary-btn">
+          Start Exploring
+        </a>
+
+        <a href="#features" class="secondary-btn">
+          View Features
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="features" id="features">
+
+    <div class="section-heading">
+      <h2>Built for testing ✦</h2>
+      <p>
+        Enough content to make the chat experience feel like a real website.
+      </p>
+    </div>
+
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="icon">💬</div>
+
+        <h3>Chat Experience</h3>
+
+        <p>
+          Test how the DevRev Plug Chat widget behaves while users browse
+          through different sections of the website.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎨</div>
+
+        <h3>UI Customisation</h3>
+
+        <p>
+          Experiment with widget colours, placement, sizing, themes,
+          branding and overall appearance.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚡</div>
+
+        <h3>Interaction Testing</h3>
+
+        <p>
+          Try opening, closing, messaging and navigating while the
+          chat widget remains available across the page.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="test-section" id="test">
+
+    <h2>Ready to test?</h2>
+
+    <p>
+      Your DevRev Plug Chat widget can live right here.
+      Try interacting with it while scrolling through the page.
+    </p>
+
+  </section>
+
+  <footer>
+    Made for DevRev Plug Chat SDK testing ✦
+  </footer>
+
+
+  <!-- =================================
+       YOUR CUSTOM FEUJI AI CHATBOT
+  ================================== -->
+
+  <div class="chatbot-container">
+
+    <div class="chat-widget" id="chatWidget">
+
+      <!-- Header -->
+
+      <div class="chat-header">
+
+        <div class="chat-title">
+
+          <div class="chat-logo">
+            ✧
+          </div>
+
+          <h3>Feuji AI</h3>
+
+        </div>
+
+        <button
+          class="close-chat"
+          id="closeChat"
+          aria-label="Close chat"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- Chat Content -->
+
+      <div class="chat-content">
+
+        <div class="bot-message">
+          Hi there, I'm Feuji AI. How can I help you today?
+        </div>
+
+        <div class="chat-suggestions">
+
+          <button
+            class="suggestion"
+            type="button"
+          >
+            Tell me about this case study
+          </button>
+
+          <button
+            class="suggestion"
+            type="button"
+          >
+            What AI services does Feuji offer?
+          </button>
+
+          <button
+            class="suggestion"
+            type="button"
+          >
+            How does the GCC model work?
+          </button>
+
+          <button
+            class="suggestion"
+            type="button"
+          >
+            I'd like to connect with your team
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Input -->
+
+      <div class="chat-input-area">
+
+        <input
+          type="text"
+          class="chat-input"
+          id="chatInput"
+          placeholder="Ask me anything"
+        >
+
+        <button
+          class="send-button"
+          id="sendButton"
+          aria-label="Send message"
+          type="button"
+        >
+          ▷
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Floating Launcher -->
+
+    <button
+      class="chatbot-launcher"
+      id="chatLauncher"
+      aria-label="Open Feuji AI"
+      type="button"
+    >
+      <span class="bot-icon">✧</span>
+    </button>
+
+  </div>
+
+
+<script>
+
+  const chatLauncher = document.getElementById("chatLauncher");
+  const chatWidget = document.getElementById("chatWidget");
+  const closeChat = document.getElementById("closeChat");
+  const chatInput = document.getElementById("chatInput");
+  const sendButton = document.getElementById("sendButton");
+  const suggestions = document.querySelectorAll(".suggestion");
+
+  /* CUSTOM CHAT OPEN / CLOSE */
+
+  chatLauncher.addEventListener("click", function () {
+    chatWidget.classList.toggle("active");
+  });
+
+  closeChat.addEventListener("click", function () {
+    chatWidget.classList.remove("active");
+  });
+
+
+  /* SEND MESSAGE
+     (No DevRev client SDK needed — messages go straight to our
+     own backend, which talks to the DevRev agent API + webhook.) */
+
+  let currentSessionId =
+  localStorage.getItem(
+    "feuji_session_id"
+  );
+
+
+function createMessage(
+  text,
+  type
+) {
+
+  const message =
+    document.createElement("div");
+
+  message.className = type;
+
+  message.textContent = text;
+
+  document
+    .querySelector(".chat-content")
+    .appendChild(message);
+
+  document
+    .querySelector(".chat-content")
+    .scrollTop =
+      document
+        .querySelector(".chat-content")
+        .scrollHeight;
+
+  return message;
+
+}
+
+
+async function sendToDevRev(message) {
+
+  const cleanMessage =
+    message.trim();
+
+  if (!cleanMessage) return;
+
+
+  /* Show user message */
+
+  createMessage(
+    cleanMessage,
+    "user-message"
+  );
+
+
+  /* Clear input */
+
+  chatInput.value = "";
+
+
+  /* Show typing indicator */
+
+  const typingMessage =
+    createMessage(
+      "Feuji AI is thinking...",
+      "bot-message"
+    );
+
+
+  try {
+
+    /* Send message to backend */
+
+    const response =
+      await fetch(
+        "/api/chat",
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              message:
+                cleanMessage,
+
+              sessionId:
+                currentSessionId
+
+            })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Failed to send message"
+      );
+
+    }
+
+
+    /* Save conversation session */
+
+    currentSessionId =
+      data.sessionId;
+
+
+    localStorage.setItem(
+      "feuji_session_id",
+      currentSessionId
+    );
+
+
+    /* Wait for DevRev AI response */
+
+    waitForResponse(
+      currentSessionId,
+      typingMessage
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    typingMessage.textContent =
+      "Sorry, something went wrong. Please try again.";
+
+  }
+
+};
+
+
+    function waitForResponse(
+  sessionId,
+  typingMessage
+) {
+
+  const interval =
+    setInterval(
+      async function () {
+
+        try {
+
+          const response =
+            await fetch(
+              `/api/chat-response/${sessionId}`
+            );
+
+          const data =
+            await response.json();
+
+
+          if (data.ready) {
+
+            clearInterval(
+              interval
+            );
+
+
+            typingMessage.textContent =
+              data.message;
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            "Response check failed:",
+            error
+          );
+
+        }
+
+      },
+
+      1000
+
+    );
+
+}
+
+
+  sendButton.addEventListener("click", function () {
+    sendToDevRev(chatInput.value);
+  });
+
+
+  chatInput.addEventListener("keydown", function (event) {
+
+    if (event.key === "Enter") {
+
+      event.preventDefault();
+
+      sendToDevRev(chatInput.value);
+
+    }
+
+  });
+
+
+  suggestions.forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+      sendToDevRev(
+        button.textContent.trim()
+      );
+
+    });
+
+  });
+</script>
+
+</body>
+</html>
